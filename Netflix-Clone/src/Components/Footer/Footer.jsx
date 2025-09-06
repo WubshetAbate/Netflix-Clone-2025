@@ -1,7 +1,5 @@
 import React from "react";
 import "./Footer.css";
-
-// Import Material UI Icons
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -10,14 +8,12 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-container">
-        {/* Social Icons */}
         <div className="footer-social">
           <a href="#"><FacebookIcon fontSize="medium" /></a>
           <a href="#"><InstagramIcon fontSize="medium" /></a>
           <a href="#"><YouTubeIcon fontSize="medium" /></a>
         </div>
 
-        {/* Footer Links */}
         <div className="footer-links">
           <ul>
             <li><a href="#">Audio Description</a></li>
@@ -40,13 +36,9 @@ function Footer() {
             <li><a href="#">Contact Us</a></li>
           </ul>
         </div>
-
-        {/* Service Code */}
         <div className="footer-service">
           <button>Service Code</button>
         </div>
-
-        {/* Copyright */}
         <p className="footer-copy">&copy; 1997-2025 Netflix, Inc.</p>
       </div>
     </footer>

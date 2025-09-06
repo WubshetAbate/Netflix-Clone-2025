@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
-import MovieList from "../../Components/MovieList"; // ✅ import component
+import MovieList from "../../Components/MovieList";
 
 function Home() {
   return (

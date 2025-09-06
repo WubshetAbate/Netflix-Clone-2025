@@ -5,7 +5,6 @@ function MovieList() {
   const [moviesByCategory, setMoviesByCategory] = useState({});
   const [selectedTrailer, setSelectedTrailer] = useState(null);
 
-  // Fetch all genres dynamically
   const getGenres = async () => {
     const res = await fetch(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=4be2412ecd340329baddaf55fcf9ec0a`
@@ -14,7 +13,6 @@ function MovieList() {
     setGenres(json.genres);
   };
 
-  // Fetch multiple pages of movies for a genre
   const getMoviesByCategory = async (genreId) => {
     let allMovies = [];
     for (let page = 1; page <= 3; page++) {
@@ -24,10 +22,12 @@ function MovieList() {
       const json = await res.json();
       allMovies = [...allMovies, ...json.results];
     }
-    return allMovies;
+    const uniqueMovies = Array.from(
+      new Map(allMovies.map((m) => [m.id, m])).values()
+    );
+    return uniqueMovies;
   };
 
-  // Fetch trailer for a movie
   const getTrailer = async (movieId) => {
     try {
       const res = await fetch(
@@ -45,26 +45,41 @@ function MovieList() {
     }
   };
 
-  // Load genres first
+  const shuffleArray = (array) => {
+    return array
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+  };
+
   useEffect(() => {
     getGenres();
   }, []);
 
-  // After genres load, fetch movies for each genre
   useEffect(() => {
     const fetchAllMovies = async () => {
-      const data = {};
+      let data = {};
       for (let genre of genres) {
-        data[genre.name] = await getMoviesByCategory(genre.id);
+        const movies = await getMoviesByCategory(genre.id);
+        data[genre.name] = shuffleArray(movies);
       }
-      setMoviesByCategory(data);
+      const shuffledData = {};
+      const shuffledKeys = shuffleArray(Object.keys(data));
+      shuffledKeys.forEach((key) => {
+        shuffledData[key] = data[key];
+      });
+
+      console.log(
+        "Dynamic Movies by Category:",
+        JSON.stringify(shuffledData, null, 2)
+      );
+      setMoviesByCategory(shuffledData);
     };
     if (genres.length > 0) fetchAllMovies();
   }, [genres]);
 
   return (
     <div style={{ padding: "20px" }}>
-      {/* Categories + Movies */}
       {Object.keys(moviesByCategory).map((category, index) => (
         <div key={index} style={{ marginBottom: "40px" }}>
           <h2 style={{ color: "#fff", marginBottom: "10px" }}>{category}</h2>
@@ -80,8 +95,13 @@ function MovieList() {
               <div
                 key={movie.id}
                 className="movie-card"
-                onClick={() => getTrailer(movie.id)} // ✅ play on click
-                style={{ cursor: "pointer" }}
+                onClick={() => getTrailer(movie.id)}
+                style={{
+                  cursor: "pointer",
+                  textAlign: "center",
+                  minWidth: "200px",
+                  flexShrink: 0,
+                }}
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
@@ -93,13 +113,22 @@ function MovieList() {
                     objectFit: "cover",
                   }}
                 />
+                <p
+                  style={{
+                    color: "#fff",
+                    marginTop: "5px",
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {movie.title}
+                </p>
               </div>
             ))}
           </div>
         </div>
       ))}
 
-      {/* Trailer Modal */}
       {selectedTrailer && (
         <div
           className="modal"
@@ -114,7 +143,7 @@ function MovieList() {
             justifyContent: "center",
             alignItems: "center",
           }}
-          onClick={() => setSelectedTrailer(null)} // close modal
+          onClick={() => setSelectedTrailer(null)}
         >
           <iframe
             width="800"

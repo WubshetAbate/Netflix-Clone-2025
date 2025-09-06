@@ -1,11 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
-
-// Logo
 import netflixLogo from "../../Asset/images/Logonetflix.png";
-
-// Material UI icons
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
