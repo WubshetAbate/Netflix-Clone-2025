@@ -5,9 +5,12 @@ function MovieList() {
   const [moviesByCategory, setMoviesByCategory] = useState({});
   const [selectedTrailer, setSelectedTrailer] = useState(null);
 
+  const API_KEY = import.meta.env.VITE_API_KEY;
+
+
   const getGenres = async () => {
     const res = await fetch(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=4be2412ecd340329baddaf55fcf9ec0a`
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`
     );
     const json = await res.json();
     setGenres(json.genres);
@@ -17,7 +20,7 @@ function MovieList() {
     let allMovies = [];
     for (let page = 1; page <= 3; page++) {
       const res = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=4be2412ecd340329baddaf55fcf9ec0a&with_genres=${genreId}&page=${page}`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`
       );
       const json = await res.json();
       allMovies = [...allMovies, ...json.results];
@@ -31,7 +34,7 @@ function MovieList() {
   const getTrailer = async (movieId) => {
     try {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=4be2412ecd340329baddaf55fcf9ec0a`
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`
       );
       const json = await res.json();
       const trailer = json.results.find((vid) => vid.type === "Trailer");
@@ -45,13 +48,6 @@ function MovieList() {
     }
   };
 
-  const shuffleArray = (array) => {
-    return array
-      .map((value) => ({ value, sort: Math.random() }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ value }) => value);
-  };
-
   useEffect(() => {
     getGenres();
   }, []);
@@ -61,19 +57,11 @@ function MovieList() {
       let data = {};
       for (let genre of genres) {
         const movies = await getMoviesByCategory(genre.id);
-        data[genre.name] = shuffleArray(movies);
+        data[genre.name] = movies;
       }
-      const shuffledData = {};
-      const shuffledKeys = shuffleArray(Object.keys(data));
-      shuffledKeys.forEach((key) => {
-        shuffledData[key] = data[key];
-      });
 
-      console.log(
-        "Dynamic Movies by Category:",
-        JSON.stringify(shuffledData, null, 2)
-      );
-      setMoviesByCategory(shuffledData);
+      console.log("Dynamic Movies by Category:", JSON.stringify(data, null, 2));
+      setMoviesByCategory(data);
     };
     if (genres.length > 0) fetchAllMovies();
   }, [genres]);
@@ -82,12 +70,21 @@ function MovieList() {
     <div style={{ padding: "20px" }}>
       {Object.keys(moviesByCategory).map((category, index) => (
         <div key={index} style={{ marginBottom: "40px" }}>
-          <h2 style={{ color: "#fff", marginBottom: "10px" }}>{category}</h2>
+          <h2
+            style={{
+              color: "#fff",
+              marginBottom: "15px",
+              fontSize: "24px",
+              fontWeight: "bold",
+            }}
+          >
+            {category}
+          </h2>
           <div
             style={{
               display: "flex",
               overflowX: "auto",
-              gap: "10px",
+              gap: "15px",
               paddingBottom: "10px",
             }}
           >
@@ -99,25 +96,32 @@ function MovieList() {
                 style={{
                   cursor: "pointer",
                   textAlign: "center",
-                  minWidth: "200px",
+                  minWidth: "220px",
                   flexShrink: 0,
+                  transition: "transform 0.3s ease",
                 }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.08)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
               >
                 <img
-                  src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
                   alt={movie.title}
                   style={{
-                    width: "200px",
-                    height: "300px",
-                    borderRadius: "10px",
+                    width: "220px",
+                    height: "330px",
+                    borderRadius: "12px",
                     objectFit: "cover",
                   }}
                 />
                 <p
                   style={{
                     color: "#fff",
-                    marginTop: "5px",
-                    fontSize: "14px",
+                    marginTop: "8px",
+                    fontSize: "16px",
                     fontWeight: "bold",
                   }}
                 >

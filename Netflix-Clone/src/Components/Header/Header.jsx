@@ -9,7 +9,16 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 export default function Header() {
   return (
-    <header>
+    <header
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        zIndex: 1000,
+        backgroundColor: "#141414", // dark background like Netflix
+      }}
+    >
       <img
         src={netflixLogo}
         alt="Netflix Logo"
@@ -26,10 +35,18 @@ export default function Header() {
 
       <div className="flex items-center space-x-4">
         <ul>
-          <li><SearchIcon /></li>
-          <li><NotificationsIcon /></li>
-          <li><AccountBoxIcon /></li>
-          <li><ArrowDropDownIcon /></li>
+          <li>
+            <SearchIcon />
+          </li>
+          <li>
+            <NotificationsIcon />
+          </li>
+          <li>
+            <AccountBoxIcon />
+          </li>
+          <li>
+            <ArrowDropDownIcon />
+          </li>
         </ul>
       </div>
     </header>
