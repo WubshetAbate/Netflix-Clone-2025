@@ -11,41 +11,41 @@ export default function Header() {
   return (
     <header
       style={{
-        position: "fixed",
+        // position: "fixed",
         top: 0,
         left: 0,
         width: "100%",
         zIndex: 1000,
-        backgroundColor: "#141414", // dark background like Netflix
+        backgroundColor: "#141414",
       }}
     >
       <img
         src={netflixLogo}
         alt="Netflix Logo"
-        style={{ width: "130px", height: "auto" }}
+        style={{ width: "160px", height: "auto" }}
       />
 
       <nav>
         <Link to="/">Home</Link>
-        <Link to="/tvshows">TV Shows</Link>
+        <Link to="/tvshows">TVShow</Link>
         <Link to="/movies">Movies</Link>
         <Link to="/latest">Latest</Link>
-        <Link to="/mylist">My List</Link>
+        <Link to="/mylist">MyList</Link>
       </nav>
 
       <div className="flex items-center space-x-4">
         <ul>
           <li>
-            <SearchIcon />
+            <SearchIcon fontSize="large" />
           </li>
           <li>
-            <NotificationsIcon />
+            <NotificationsIcon fontSize="large" />
           </li>
           <li>
-            <AccountBoxIcon />
+            <AccountBoxIcon fontSize="large" />
           </li>
           <li>
-            <ArrowDropDownIcon />
+            <ArrowDropDownIcon fontSize="large" />
           </li>
         </ul>
       </div>
