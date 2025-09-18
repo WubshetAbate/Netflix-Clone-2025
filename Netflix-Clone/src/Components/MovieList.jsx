@@ -60,7 +60,7 @@ function MovieList() {
         data[genre.name] = movies;
       }
 
-      console.log("Dynamic Movies by Category:", JSON.stringify(data, null, 2));
+       console.log("Dynamic Movies by Category:", JSON.stringify(data, null, 2));
       setMoviesByCategory(data);
     };
     if (genres.length > 0) fetchAllMovies();
@@ -97,15 +97,9 @@ function MovieList() {
                   cursor: "pointer",
                   textAlign: "center",
                   minWidth: "220px",
-                  flexShrink: 0,
                   transition: "transform 0.3s ease",
                 }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.08)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.transform = "scale(1)")
-                }
+                
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
@@ -155,7 +149,6 @@ function MovieList() {
             src={selectedTrailer}
             title="Trailer"
             frameBorder="0"
-            allow="autoplay; encrypted-media"
             allowFullScreen
           ></iframe>
         </div>

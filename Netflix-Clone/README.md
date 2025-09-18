@@ -1,12 +1,96 @@
-# React + Vite
+# Netflix Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern Netflix clone built with React and Vite, featuring a responsive design and movie browsing interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Responsive design that works on all devices
+- Modern React components with hooks
+- Material-UI components for enhanced UI
+- React Router for navigation
+- Optimized build with Vite
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (version 18 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/WubshetAbate/Netflix-Clone-2025.git
+cd Netflix-Clone-2025/Netflix-Clone
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+## Deployment
+
+This project is configured for deployment on GitHub Pages.
+
+### Automatic Deployment
+
+The project includes a GitHub Actions workflow that automatically deploys to GitHub Pages when you push to the main branch.
+
+### Manual Deployment
+
+You can also deploy manually using the gh-pages package:
+
+```bash
+npm run deploy
+```
+
+## Project Structure
+
+```
+src/
+├── Components/
+│   ├── Banner/
+│   ├── Footer/
+│   ├── Header/
+│   └── MovieList.jsx
+├── Pages/
+│   └── Home/
+├── Asset/
+│   └── images/
+├── App.jsx
+├── App.css
+├── main.jsx
+└── index.css
+```
+
+## Technologies Used
+
+- React 18
+- Vite
+- Material-UI
+- React Router DOM
+- Axios
+- React Icons
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.

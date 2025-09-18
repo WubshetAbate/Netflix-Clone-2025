@@ -71,7 +71,6 @@ function Banner() {
             src={bannerMovie.trailerUrl}
             title="Trailer"
             frameBorder="0"
-            allow="autoplay; encrypted-media"
             allowFullScreen
           ></iframe>
           <button className="close-btn" onClick={handleCloseTrailer}>
