@@ -1,16 +1,16 @@
 {
-  "homepage": "https://WubshetAbate.github.io/Netflix-Clone-2025/",
-  "name": "netflix-clone",
+  "homepage": "https://WubshetAbate.github.io/Netflix-Clone-2025",
+  "name": "Netflix-Clone",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
